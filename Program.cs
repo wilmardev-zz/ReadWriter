@@ -22,7 +22,7 @@ namespace ReadWriter
                 threadReader.Start();
             }
 
-            Writer[] writers = new Writer[3];
+            Writer[] writers = new Writer[1];
             Thread threadWriter = null;
             for (int i = 0; i < writers.Length; i++)
             {
