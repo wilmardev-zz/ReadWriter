@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace ReadWriter
@@ -23,11 +22,11 @@ namespace ReadWriter
                 while (true)
                 {
                     management.OpenReader(name);
-                    Thread.Sleep(random.Next(500, 1500));
+                    Thread.Sleep(random.Next(2000, 3000));
                     management.CloseReader(name);
                 }
             }
-            catch (ThreadInterruptedException ex) { }
+            catch (ThreadInterruptedException ex) { Console.WriteLine(ex.Message); }
         }
     }
 }

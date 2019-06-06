@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace ReadWriter
@@ -11,20 +10,23 @@ namespace ReadWriter
 
         public void OpenReader(string name)
         {
-            lock (this)
+            Management management = this;
+            lock (management)
             {
                 while (countWriter > 0)
                     Monitor.Wait(this);
                 countReaders++;
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine($"Reader '{name}' is reading");
             }
         }
 
-
         public void CloseReader(string name)
         {
-            lock (this)
+            Management management = this;
+            lock (management)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine($"Reader '{name}' end of read.");
                 countReaders--;
                 if (countReaders == 0)
@@ -32,24 +34,26 @@ namespace ReadWriter
             }
         }
 
-
         public void OpenWriter(string name)
         {
-            lock (this)
+            Management management = this;
+            lock (management)
             {
                 countWriter++;
                 while (countReaders > 0)
                     Monitor.Wait(this);
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"Writer '{name}' is writing");
             }
         }
 
-
         public void CloseWriter(string name)
         {
-            lock (this)
+            Management management = this;
+            lock (management)
             {
                 countWriter--;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"Writer '{name}' end of write.");
                 Monitor.PulseAll(this);
             }
