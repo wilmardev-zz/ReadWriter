@@ -22,8 +22,9 @@ namespace ReadWriter
                 while (true)
                 {
                     management.OpenWriter(name);
-                    Thread.Sleep(random.Next(2000, 3000));
+                    Thread.Sleep(random.Next(3000));
                     management.CloseWriter(name);
+                    Thread.Sleep(random.Next(6000));
                 }
             }
             catch (ThreadInterruptedException ex)

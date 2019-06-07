@@ -22,7 +22,7 @@ namespace ReadWriter
                 while (true)
                 {
                     management.OpenReader(name);
-                    Thread.Sleep(random.Next(2000, 3000));
+                    Thread.Sleep(random.Next(5000));
                     management.CloseReader(name);
                 }
             }

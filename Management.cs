@@ -7,13 +7,14 @@ namespace ReadWriter
     {
         private int countReaders = 0;
         private int countWriter = 0;
+        private bool existWriter = false;
 
         public void OpenReader(string name)
         {
             Management management = this;
             lock (management)
             {
-                while (countWriter > 0)
+                while (existWriter || countWriter > 0)
                     Monitor.Wait(this);
                 countReaders++;
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -40,8 +41,9 @@ namespace ReadWriter
             lock (management)
             {
                 countWriter++;
-                while (countReaders > 0)
+                while (existWriter || countReaders > 0)
                     Monitor.Wait(this);
+                existWriter = true;
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"Writer '{name}' is writing");
             }
@@ -55,6 +57,7 @@ namespace ReadWriter
                 countWriter--;
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"Writer '{name}' end of write.");
+                existWriter = false;
                 Monitor.PulseAll(this);
             }
         }

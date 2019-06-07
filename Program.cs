@@ -12,12 +12,12 @@ namespace ReadWriter
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Enter the number of readers: ");
             ValidInputReaders(out string nReaders);
-            //Console.WriteLine("Ingrese Cantidad de Escritores");
-            //string nWriters = Console.ReadLine();
+            Console.Write("Enter the number of writers: ");
+            ValidInputWriters(out string nWriters);
+            CreateWriters(nWriters, out Thread threadWriter);
             CreateReaders(nReaders, out Thread threadReader);
-            CreateWriters("1", out Thread threadWriter);
-            threadReader.Join();
             threadWriter.Join();
+            threadReader.Join();
             Console.ReadKey();
         }
 
@@ -33,6 +33,42 @@ namespace ReadWriter
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Enter the number of readers: ");
                 nReaders = Console.ReadLine();
+            }
+            while (Convert.ToInt32(nReaders) < 1)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(">>> ERROR!! Please enter a positive number <<<");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Enter the number of readers: ");
+                nReaders = Console.ReadLine();
+            }
+            Console.WriteLine();
+        }
+
+        private static void ValidInputWriters(out string nWriters)
+        {
+            nWriters = Console.ReadLine();
+            while (!int.TryParse(nWriters, out _))
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(">>> ERROR!! Please enter a valid number <<<");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Enter the number of writers: ");
+                nWriters = Console.ReadLine();
+            }
+            while (Convert.ToInt32(nWriters) < 1)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(">>> ERROR!! Please enter a positive number <<<");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Enter the number of writers: ");
+                nWriters = Console.ReadLine();
             }
             Console.WriteLine();
         }
