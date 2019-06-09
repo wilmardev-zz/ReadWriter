@@ -38,7 +38,7 @@ namespace ReadWriter
             {
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(">>> ERROR!! Please enter a positive number <<<");
+                Console.WriteLine(">>> ERROR!! Please enter a number greater than 0 <<<");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Enter the number of readers: ");
@@ -64,7 +64,7 @@ namespace ReadWriter
             {
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(">>> ERROR!! Please enter a positive number <<<");
+                Console.WriteLine(">>> ERROR!! Please enter a number greater than 0 <<<");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Enter the number of writers: ");
